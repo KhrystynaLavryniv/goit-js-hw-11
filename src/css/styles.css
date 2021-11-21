@@ -43,20 +43,19 @@ img {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 10px;
   margin-left: -20px;
 }
-.link__icon {
-  display: block;
+.material-icons {
   align-items: center;
   justify-content: baseline;
-  fill: #000;
+  fill: rgb(73, 71, 71);
 }
 .photo-card {
   height: 100%;
   flex-basis: calc((100% - 80px) / 4);
   margin-left: 20px;
-  margin-top: 20px;
+  margin-top: 10px;
   object-fit: cover;
 }
 .photo-card:hover,
@@ -87,12 +86,14 @@ img {
 }
 
 .info {
-  padding-top: 15px;
-  padding-bottom: 15px;
+  color: grey;
+  padding: 15px;
+  padding-bottom: 0;
   display: flex;
   justify-content: space-between;
   text-align: center;
 }
 .info-item {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }

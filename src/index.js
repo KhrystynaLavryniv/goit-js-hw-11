@@ -44,13 +44,10 @@ function onSearch (e) {
      alert('Please, enter your query in the search bar!')
      return;
   };
-  Notify.success(`"Hooray! We found ${totalHits} images."`);
 
   getPhoto(value).then(renderGallery);
-  
   refs.btnLoadMore.removeAttribute('hidden');
   incrememtPage()
-  
 };
 
 function renderGallery(data) {
@@ -62,29 +59,31 @@ function renderGallery(data) {
           </a>
         <div class="info">
           <p class="info-item">
-            <b>Likes: ${card.likes}</b>
+            <i class="material-icons">favorite</i> <span>${card.likes}</span>
           </p>
           <p class="info-item">
-            <b>Views: ${card.views}</b>
+            <i class="material-icons">remove_red_eye</i> ${card.views}
           </p>
           <p class="info-item">
-            <b>Comments: ${card.comments}</b>
+            <i class="material-icons">forum</i> ${card.comments}
           </p>
           <p class="info-item">
-            <b>Downloads: ${card.downloads}</b>
+            <i class="material-icons">save_alt</i> ${card.downloads}
           </p>
         </div>
       </div>`;    
     })
     .join("");
+  
+    if (data.total > 0) { Notify.success(`"Hooray! We found ${totalHits} images."`) };
 
     if (data.total === 0) {
-      refs.btnLoadMore.classList.add('is-hidden');
+      refs.btnLoadMore.setAttribute("hidden", true)
       return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
     }
-  
+
   refs.gallery.insertAdjacentHTML('beforeend', markup);
-  let gallery = new SimpleLightbox('.gallery a',  { captionDelay: '250 ms' });
+  let gallery = new SimpleLightbox('.gallery a',  { captionData: 'class="info"', captionDelay: '250 ms' });
           gallery.refresh();
 }
 
@@ -103,12 +102,4 @@ function onLoadMore (e) {
 function incrememtPage() {
    page += 1;
 }
-
-
-// const lightbox = new SimpleLightbox('.gallery a');
-  
-
-    
-
-
 
