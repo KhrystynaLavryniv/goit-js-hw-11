@@ -81,9 +81,11 @@ function renderGallery(data) {
     if (data.total === 0) {
       refs.btnLoadMore.classList.add('is-hidden');
       return Notify.failure('Sorry, there are no images matching your search query. Please try again.');
-  }
-
-  return refs.gallery.insertAdjacentHTML('beforeend', markup);
+    }
+  
+  refs.gallery.insertAdjacentHTML('beforeend', markup);
+  let gallery = new SimpleLightbox('.gallery a',  { captionDelay: '250 ms' });
+          gallery.refresh();
 }
 
 function onLoadMore (e) {
@@ -102,7 +104,10 @@ function incrememtPage() {
    page += 1;
 }
 
-const lightbox = new SimpleLightbox('.gallery a');
+
+// const lightbox = new SimpleLightbox('.gallery a');
+  
+
     
 
 
