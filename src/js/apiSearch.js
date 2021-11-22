@@ -3,17 +3,39 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://pixabay.com/api';
 const API_KEY = '?key=24424361-80a045fa2441dce42755517a4'
-let page = 1;
-const pageSize = 40;
 
-export async function getPhoto (value) {
-  try {
-    const url = `${API_KEY}&q=${value}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${pageSize}`;
-    const response = await axios.get(url);
-  return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-  console.log(response.data)
-};
- 
+export default class Pixabay {
+    constructor() {
+        this.searchQuery = "";
+        this.page = 1;
+        this.perPage = 40;
+        this.totalHits = 0;
+        this.total = 0;
+        
+    }
+    async getPhoto() {
+        try {
+            const url = `${API_KEY}&q=${this.searchQuery}&image_type=photo&orientation=horizontal&safesearch=true&page=${this.page}&per_page=${this.perPage}`;
+            const hits = await axios.get(url);
+            this.incrementPage();
+            return hits.data;
+        } catch (error) {
+        }
+    };
+
+    incrementPage() {
+        this.page +=1;
+    }
+
+    resetPage() {
+        this.page = 1;
+    }
+
+    get query() {
+        return this.searchQuery;
+    }
+
+    set query(newQuery) {
+        this.searchQuery = newQuery;
+    }
+}
