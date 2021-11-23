@@ -49,6 +49,7 @@ function onLoadMoreBtn() {
   pix.getPhoto().then(({ hits, totalHits, perPage, page, total }) => {
       renderGallery(hits);
     lightbox();
+    scroll ()
 
   if (hits.length < 40){
   refs.btnLoadMore.setAttribute("hidden", true)
@@ -65,4 +66,15 @@ function renderGallery(hits) {
 function lightbox() {
   const lightbox = new SimpleLightbox('.gallery a');
     lightbox.refresh();
+}
+
+function scroll () {
+  const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
 }
